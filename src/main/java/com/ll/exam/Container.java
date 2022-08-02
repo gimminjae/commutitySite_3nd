@@ -2,6 +2,7 @@ package com.ll.exam;
 
 import com.ll.exam.annotation.Controller;
 import com.ll.exam.article.controller.ArticleController;
+import com.ll.exam.home.controller.HomeController;
 import javassist.tools.reflect.Reflection;
 import org.reflections.Reflections;
 
@@ -10,8 +11,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Container {
+    private static final HomeController homeController;
+
     private static final ArticleController articleController;
     static {
+        homeController = new HomeController();
         articleController = new ArticleController();
     }
     public static ArticleController getArticleController() {
@@ -31,5 +35,9 @@ public class Container {
         }
 
         return names;
+    }
+
+    public static HomeController getHomeController() {
+        return homeController;
     }
 }
