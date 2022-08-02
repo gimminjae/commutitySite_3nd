@@ -6,21 +6,16 @@ import com.ll.exam.home.controller.HomeController;
 import javassist.tools.reflect.Reflection;
 import org.reflections.Reflections;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Container {
-    private static final HomeController homeController;
-
-    private static final ArticleController articleController;
+    private static Map<Class, Object> objects;
     static {
-        articleController = Ut.cls.newObj(ArticleController.class, null);
-        homeController = Ut.cls.newObj(HomeController.class, null);
+        objects = new HashMap<>();
+        objects.put(ArticleController.class, new ArticleController());
+        objects.put(HomeController.class, new HomeController());
     }
-    public static ArticleController getArticleController() {
-        return articleController;
-    }
+
 
     public static List<String> getControllerNames() {
         List<String> names = new ArrayList<>();
@@ -37,7 +32,8 @@ public class Container {
         return names;
     }
 
-    public static HomeController getHomeController() {
-        return homeController;
+
+    public static <T> T getObj(Class<T> cls) {
+        return (T)objects.get(cls);
     }
 }

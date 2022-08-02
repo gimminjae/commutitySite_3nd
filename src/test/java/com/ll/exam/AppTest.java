@@ -17,16 +17,32 @@ public class AppTest {
     }
     @Test
     public void ioc__articleController() {
-        ArticleController articleController = Container.getArticleController();
+        ArticleController articleController = Container.getObj(ArticleController.class);
 
         assertThat(articleController).isNotNull();
     }
+
     @Test
     public void ioc__articleController__싱글톤() {
-        ArticleController articleController1 = Container.getArticleController();
-        ArticleController articleController2 = Container.getArticleController();
+        ArticleController articleController1 = Container.getObj(ArticleController.class);
+        ArticleController articleController2 = Container.getObj(ArticleController.class);
 
         assertThat(articleController2).isEqualTo(articleController1);
+    }
+
+    @Test
+    public void ioc__homeController() {
+        HomeController homeController = Container.getObj(HomeController.class);
+
+        assertThat(homeController).isNotNull();
+    }
+
+    @Test
+    public void ioc__homeController__싱글톤() {
+        HomeController homeController1 = Container.getObj(HomeController.class);
+        HomeController homeController2 = Container.getObj(HomeController.class);
+
+        assertThat(homeController2).isEqualTo(homeController1);
     }
     @Test
     public void ioc__Controller들을_스캔하여_수집() {
@@ -35,19 +51,7 @@ public class AppTest {
         assertThat(names).contains("home");
         assertThat(names).contains("article");
     }
-    @Test
-    public void ioc__homeController() {
-        HomeController homeController = Container.getHomeController();
 
-        assertThat(homeController).isNotNull();
-    }
-    @Test
-    public void ioc__homeController__싱글톤() {
-        HomeController homeController1 = Container.getHomeController();
-        HomeController homeController2 = Container.getHomeController();
-
-        assertThat(homeController2).isEqualTo(homeController1);
-    }
 //    public void ioc__articleService() {
 //        ArticleService articleService = Container.getArticleService();
 //
