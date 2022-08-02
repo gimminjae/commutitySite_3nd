@@ -28,7 +28,6 @@ public class AppTest {
         assertThat(articleController1).isEqualTo(articleController2);
     }
     @Test
-    @Test
     public void ioc__Controller들을_스캔하여_수집() {
         List<String> names = Container.getControllerNames();
 
