@@ -48,4 +48,9 @@ public class AppTest {
 
         assertThat(homeController2).isEqualTo(homeController1);
     }
+//    public void ioc__articleService() {
+//        ArticleService articleService = Container.getArticleService();
+//
+//        assertThat(articleService).isNotNull();
+//    }
 }
